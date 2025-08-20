@@ -1,0 +1,44 @@
+[workspace]
+members = [
+  "crates/ext",
+  "crates/ext-api",
+  "crates/ext-core",
+  "extensions/base64",
+  "extensions/emoji",
+]
+resolver = "2"
+
+[workspace.package]
+description = "Try to build an extension system with wasmtime"
+edition = "2021"
+license = "MIT"
+homepage = "https://github.com/SpuerMomonga/rust-wasmtime"
+repository = "https://github.com/SpuerMomonga/rust-wasmtime"
+readme = "README.md"
+authors = ["SpuerMomonga <spuermomonga@qq.com>"]
+
+[workspace.dependencies]
+
+#
+# Workspace member crates
+#
+
+ext-api = { path = "crates/ext-api" }
+ext-core = { path = "crates/ext-core" }
+
+#
+# External crates
+#
+
+anyhow = "1"
+tokio = { version = "1" }
+wasmtime = { version = "35", default-features = false, features = [
+  "async",
+  "demangle",
+  "runtime",
+  "cranelift",
+  "component-model",
+  "incremental-cache",
+  "parallel-compilation",
+] }
+wasmtime-wasi = "35"
