@@ -2,6 +2,7 @@
 members = [
   "crates/ext",
   "crates/ext-api",
+  "crates/ext-cli",
   "crates/ext-core",
   "extensions/base64",
   "extensions/emoji",
@@ -31,8 +32,10 @@ ext-core = { path = "crates/ext-core" }
 #
 
 anyhow = "1"
+clap = { version = "4.5", features = ["derive"] }
 tokio = { version = "1" }
 wasmtime = { version = "35", default-features = false, features = [
+  "wat",
   "async",
   "demangle",
   "runtime",

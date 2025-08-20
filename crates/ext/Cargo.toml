@@ -8,3 +8,8 @@ homepage.workspace = true
 repository.workspace = true
 license.workspace = true
 edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+tokio = { workspace = true, features = ["rt", "rt-multi-thread", "macros"] }
+wasmtime.workspace = true
