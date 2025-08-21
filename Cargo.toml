@@ -6,8 +6,10 @@ members = [
   "crates/ext-core",
   "crates/ext-manifest",
   "crates/ext-schema",
+  "crates/fs",
+  "crates/paths",
   "crates/utils",
-  "extensions/base64",
+  "extensions/clipboard",
   "extensions/emoji",
 ]
 resolver = "2"
@@ -30,6 +32,8 @@ authors = ["SpuerMomonga <spuermomonga@qq.com>"]
 ext-api = { path = "crates/ext-api" }
 ext-core = { path = "crates/ext-core" }
 ext-manifest = { path = "crates/ext-manifest" }
+fs = { path = "crates/fs" }
+paths = { path = "crates/paths" }
 utils = { path = "crates/utils" }
 
 #
@@ -37,7 +41,12 @@ utils = { path = "crates/utils" }
 #
 
 anyhow = "1"
+async-trait = "0.1"
 clap = { version = "4.5", features = ["derive"] }
+dirs = "6.0.0"
+file-id = "0.2.3"
+futures = "0.3"
+libc = "0.2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 semver = { version = "1", features = ["serde"] }

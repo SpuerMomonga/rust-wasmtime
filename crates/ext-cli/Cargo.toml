@@ -16,4 +16,7 @@ path = "src/main.rs"
 [dependencies]
 anyhow.workspace = true
 clap.workspace = true
+ext-core.workspace = true
+ext-manifest.workspace = true
+fs.workspace = true
 tokio = { workspace = true, features = ["full"] }

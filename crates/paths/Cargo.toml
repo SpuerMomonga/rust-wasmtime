@@ -1,6 +1,6 @@
 [package]
-name = "ext-core"
-version = "0.0.1"
+name = "paths"
+version = "0.0.0"
 publish = false
 readme = "README.md"
 authors.workspace = true
@@ -10,8 +10,11 @@ license.workspace = true
 edition.workspace = true
 
 [lib]
-path = "src/extension.rs"
+path = "src/paths.rs"
+
+[[test]]
+name = "paths"
+path = "tests/mod.rs"
 
 [dependencies]
-anyhow.workspace = true
-ext-manifest.workspace = true
+dirs.workspace = true

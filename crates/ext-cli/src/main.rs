@@ -1,7 +1,10 @@
-use std::path::PathBuf;
+use std::{path::PathBuf, sync::Arc};
 
 use anyhow::{Context, Result};
 use clap::Parser;
+use ext_core::ExtensionBuilder;
+use ext_manifest::ExtensionManifest;
+use fs::RealFs;
 
 #[derive(Parser, Debug)]
 #[command(
@@ -23,6 +26,7 @@ struct Args {
 #[tokio::main]
 async fn main() -> Result<()> {
     let args = Args::parse();
+    let fs = Arc::new(RealFs::new());
 
     let extension_path = args
         .source_dir
@@ -32,6 +36,14 @@ async fn main() -> Result<()> {
         .scratch_dir
         .canonicalize()
         .context("failed to canonicalize scratch_dir")?;
+
+    let mut manifest = ExtensionManifest::load(fs.clone(), &extension_path).await?;
+
+    let builder = ExtensionBuilder::new(scratch_dir);
+    builder
+        .compile_extension(&extension_path, &mut manifest)
+        .await
+        .context("failed to compile extension")?;
 
     Ok(())
 }

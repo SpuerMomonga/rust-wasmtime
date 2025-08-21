@@ -1,8 +1,11 @@
 {
   "$schema": "../../crates/ext-schema/schema/extension.schema.json",
-  "name": "base64",
+  "name": "clipboard",
   "title": "Base64转换",
   "version": "0.0.1",
   "publisher": "spuermomonga",
-  "license": "MIT"
+  "license": "MIT",
+  "description": "Manage and view the clipboard",
+  "icon": "icon.png",
+  "contributes": {}
 }

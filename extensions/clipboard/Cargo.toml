@@ -1,5 +1,5 @@
 [package]
-name = "base64"
+name = "clipboard"
 version = "0.0.1"
 publish = false
 readme = "README.md"
@@ -10,5 +10,5 @@ license.workspace = true
 edition.workspace = true
 
 [lib]
-path = "src/base64.rs"
+path = "src/clipboard.rs"
 crate-type = ["cdylib"]

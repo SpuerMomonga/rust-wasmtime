@@ -1,3 +1,7 @@
+use std::{ffi::OsStr, path::Path, sync::Arc};
+
+use anyhow::{Context as _, Result};
+use fs::Fs;
 use schemars::JsonSchema;
 use semver::Version;
 use serde::{Deserialize, Serialize};
@@ -71,10 +75,68 @@ pub enum LicenseManifest {
 
 #[derive(Debug, PartialEq, Eq, Clone, Deserialize, Serialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
-pub struct ContributesManifest {}
+pub struct ContributesManifest {
+    /// List of all commands vended by this extensions.
+    #[schemars(title = "Executable extension's commands", length(max = 100))]
+    pub commands: Option<Vec<CommandManifest>>,
+    pub command_palettes: Option<Vec<CommandPalettesManifest>>,
+    pub icons: Option<Vec<IconsManifest>>,
+    pub icon_themes: Option<Vec<IconThemesManifest>>,
+    pub keybindings: Option<Vec<KeybindingManifest>>,
+    pub preferences: Option<Vec<PreferenceManifest>>,
+    pub themes: Option<Vec<ThemesManifest>>,
+    pub views: Option<Vec<ViewManifest>>,
+}
+
+#[derive(Debug, PartialEq, Eq, Clone, Deserialize, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct CommandManifest {}
+
+#[derive(Debug, PartialEq, Eq, Clone, Deserialize, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct CommandPalettesManifest {}
+
+#[derive(Debug, PartialEq, Eq, Clone, Deserialize, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct IconsManifest {}
+
+#[derive(Debug, PartialEq, Eq, Clone, Deserialize, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct IconThemesManifest {}
+
+#[derive(Debug, PartialEq, Eq, Clone, Deserialize, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct KeybindingManifest {}
+
+#[derive(Debug, PartialEq, Eq, Clone, Deserialize, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct PreferenceManifest {}
+
+#[derive(Debug, PartialEq, Eq, Clone, Deserialize, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct ThemesManifest {}
+
+#[derive(Debug, PartialEq, Eq, Clone, Deserialize, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct ViewManifest {}
 
 impl ExtensionManifest {
-    // pub async fn load() -> Result<Self> {
-    //     Ok()
-    // }
+    pub async fn load(fs: Arc<dyn Fs>, extension_dir: &Path) -> Result<Self> {
+        let extension_name = extension_dir
+            .file_name()
+            .and_then(OsStr::to_str)
+            .context("invalid extension name")?;
+
+        let extension_manifest_path = extension_dir.join("extension.json");
+        if fs.is_file(&extension_manifest_path).await {
+            let manifest_content = fs
+                .load(&extension_manifest_path)
+                .await
+                .with_context(|| format!("failed to load {extension_name} extension.json"))?;
+            serde_json::from_str::<ExtensionManifest>(&manifest_content)
+                .with_context(|| format!("invalid extension.json for extension {extension_name}"))
+        } else {
+            anyhow::bail!("extension {} is missing required extension.json file", extension_name)
+        }
+    }
 }
