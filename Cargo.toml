@@ -4,6 +4,9 @@ members = [
   "crates/ext-api",
   "crates/ext-cli",
   "crates/ext-core",
+  "crates/ext-manifest",
+  "crates/ext-schema",
+  "crates/utils",
   "extensions/base64",
   "extensions/emoji",
 ]
@@ -26,6 +29,8 @@ authors = ["SpuerMomonga <spuermomonga@qq.com>"]
 
 ext-api = { path = "crates/ext-api" }
 ext-core = { path = "crates/ext-core" }
+ext-manifest = { path = "crates/ext-manifest" }
+utils = { path = "crates/utils" }
 
 #
 # External crates
@@ -33,8 +38,14 @@ ext-core = { path = "crates/ext-core" }
 
 anyhow = "1"
 clap = { version = "4.5", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+semver = { version = "1", features = ["serde"] }
+schemars = { version = "1", features = ["url2", "semver1"] }
+strum = { version = "0.27", features = ["derive"] }
+url = { version = "2", features = ["serde"] }
 tokio = { version = "1" }
-wasmtime = { version = "35", default-features = false, features = [
+wasmtime = { version = "36", default-features = false, features = [
   "wat",
   "async",
   "demangle",
@@ -44,4 +55,4 @@ wasmtime = { version = "35", default-features = false, features = [
   "incremental-cache",
   "parallel-compilation",
 ] }
-wasmtime-wasi = "35"
+wasmtime-wasi = "36"

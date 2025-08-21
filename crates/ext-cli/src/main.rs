@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-use anyhow::Result;
+use anyhow::{Context, Result};
 use clap::Parser;
 
 #[derive(Parser, Debug)]
@@ -23,6 +23,15 @@ struct Args {
 #[tokio::main]
 async fn main() -> Result<()> {
     let args = Args::parse();
-    println!("source_dir: {:?}", args.source_dir);
+
+    let extension_path = args
+        .source_dir
+        .canonicalize()
+        .context("failed to canonicalize source_dir")?;
+    let scratch_dir = args
+        .scratch_dir
+        .canonicalize()
+        .context("failed to canonicalize scratch_dir")?;
+
     Ok(())
 }
