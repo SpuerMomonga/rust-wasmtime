@@ -12,10 +12,6 @@ edition.workspace = true
 [lib]
 path = "src/fs.rs"
 
-[[test]]
-name = "fs"
-path = "tests/mod.rs"
-
 [dependencies]
 anyhow.workspace = true
 async-trait.workspace = true

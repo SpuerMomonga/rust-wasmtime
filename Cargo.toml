@@ -4,6 +4,7 @@ members = [
   "crates/ext-api",
   "crates/ext-cli",
   "crates/ext-core",
+  "crates/ext-host",
   "crates/ext-manifest",
   "crates/ext-schema",
   "crates/fs",

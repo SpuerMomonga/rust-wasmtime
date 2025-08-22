@@ -562,6 +562,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "ext-host"
+version = "0.0.1"
+
+[[package]]
 name = "ext-manifest"
 version = "0.0.1"
 dependencies = [

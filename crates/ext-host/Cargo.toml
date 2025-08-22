@@ -1,6 +1,6 @@
 [package]
-name = "paths"
-version = "0.0.0"
+name = "ext-host"
+version = "0.0.1"
 publish = false
 readme = "README.md"
 authors.workspace = true
@@ -10,7 +10,6 @@ license.workspace = true
 edition.workspace = true
 
 [lib]
-path = "src/paths.rs"
+path = "src/extension_host.rs"
 
 [dependencies]
-dirs.workspace = true

@@ -90,7 +90,29 @@ pub struct ContributesManifest {
 
 #[derive(Debug, PartialEq, Eq, Clone, Deserialize, Serialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
-pub struct CommandManifest {}
+pub struct CommandManifest {
+    ///
+    #[schemars(title = "", length(min = 2, max = 255), pattern(r"^[a-z0-9-~][a-zA-Z0-9-._~]*$"))]
+    pub command: String,
+    ///
+    #[schemars(title = "The human-friendly command's name", length(min = 2, max = 255))]
+    pub title: String,
+    ///
+    #[schemars(title = "", length(min = 2, max = 255))]
+    pub subtitle: Option<String>,
+    ///
+    #[schemars(title = "The command's description", length(min = 12, max = 2048))]
+    pub description: String,
+    /// It is recommended to use SVG for icons.
+    /// If PNG or JPG is needed, the minimum size should be 512x512 pixels.
+    /// The icon will be displayed in "Preferences" and "Raykit Root Directory Search".
+    /// If there is no icon for this command, it will inherit the icon of the extension.
+    /// Please note that icons support dark and light themes. For example, set this property to "icon.png" and place two files "icon@light.png" and "icon@dark.png" in the resource folder.
+    #[schemars(title = "The command's icon", pattern(r"\.(png|svg|jpg)$"))]
+    pub icon: Option<String>,
+    #[schemars(title = "")]
+    pub disabled_by_default: Option<bool>,
+}
 
 #[derive(Debug, PartialEq, Eq, Clone, Deserialize, Serialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
