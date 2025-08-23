@@ -1,0 +1,6 @@
+interface commands {
+    record command {
+        name: string,
+    }
+}
+   

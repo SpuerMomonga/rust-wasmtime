@@ -1,5 +1,5 @@
 [package]
-name = "ext-api"
+name = "raykit-api"
 version = "0.0.0"
 publish = false
 readme = "README.md"
@@ -11,3 +11,9 @@ edition.workspace = true
 
 [lib]
 path = "src/extension_api.rs"
+
+[dependencies]
+wit-bindgen = "0.44"
+
+[package.metadata.component]
+target = { path = "wit" }

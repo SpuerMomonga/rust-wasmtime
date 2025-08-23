@@ -1,0 +1,11 @@
+package raykit:extension;
+
+world extension {
+
+    use commands.{command};
+
+    import register-command: func(name: string);
+
+    export execute-command: func(cmd: command); 
+}
+
