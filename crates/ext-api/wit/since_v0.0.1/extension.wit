@@ -6,6 +6,6 @@ world extension {
 
     import register-command: func(name: string);
 
-    export execute-command: func(cmd: command); 
+    export execute-command: func(cmd: command);
 }
 
