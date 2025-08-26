@@ -4,8 +4,21 @@ world extension {
 
     use commands.{command};
 
-    import register-command: func(name: string);
+    export activate: func();
 
-    export execute-command: func(cmd: command);
+    export deactivate: func();
+
+    export run-commands: func();
+
+    import send-command: func(cmd: command);
+
+    import get-commands: func();
+
+    import get-settings: func();
 }
 
+interface commands {
+    record command {
+        name: string,
+    }
+}
